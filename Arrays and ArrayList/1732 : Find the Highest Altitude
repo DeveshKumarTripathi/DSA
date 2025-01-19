@@ -1,0 +1,18 @@
+class Solution {
+    public int largestAltitude(int[] gain) {
+        ArrayList<Integer> array = new ArrayList<>();
+        array.add(0);
+
+        for(int i =0; i< gain.length ; i++){
+            if(i == 0){
+                array.add(gain[i]);
+            }else{
+                int sum = gain[i] + array.get(i);
+                array.add(sum);
+            }
+        }
+
+        int max = Collections.max(array);
+        return max;
+    }
+}
