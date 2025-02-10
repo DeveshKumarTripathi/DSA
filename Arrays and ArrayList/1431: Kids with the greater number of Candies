@@ -11,6 +11,6 @@ class Solution {
         for(int c : candies){
             result.add(c + extraCandies >= maxElement);
         }
-        return result;
+        return result; 
     }
 }
