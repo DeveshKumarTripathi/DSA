@@ -6,5 +6,5 @@ class Solution {
             ans[j+1] = nums[n+i];
             j = j+2;
         }return ans;
-    }
+    } 
 }
