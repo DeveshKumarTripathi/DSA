@@ -13,7 +13,7 @@ class Solution {
 
         int count = 0;
 
-        for (int i = 0 ; i < items.size(); i++){
+        for (int i = 0 ; i < items.size(); i++){ 
             if(items.get(i).get(index).equals(ruleValue)){
                 count++;
             }
