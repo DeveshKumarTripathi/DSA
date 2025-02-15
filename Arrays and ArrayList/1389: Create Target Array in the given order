@@ -11,7 +11,7 @@ class Solution {
                     target[j] = target[j-1];
                 }
             }
-            target[index[i]] = nums[i];
+            target[index[i]] = nums[i]; 
         }return target;
     }
 }
