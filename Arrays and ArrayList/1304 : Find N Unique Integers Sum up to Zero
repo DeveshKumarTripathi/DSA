@@ -13,6 +13,6 @@ class Solution {
             arr[n / 2] = 0;  
         }
         
-        return arr;
+        return arr; 
     }    
 }
