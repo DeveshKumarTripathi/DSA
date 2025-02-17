@@ -9,7 +9,7 @@ class Heaps<T extends Comparable<T>>{
 
     private void swap(int first, int second){
         T temp = list.get(first);
-        list.set(first, list.get(second));
+        list.set(first, list.get(second)); 
         list.set(second, temp);
     }
 
