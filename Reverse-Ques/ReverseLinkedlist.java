@@ -8,7 +8,7 @@ class Node {
 }
 
 public class ReverseLinkedList {
-    public static Node reverse(Node head) {
+    public static Node reverse(Node head) { 
         Node prev = null;
         Node current = head;
         Node next = null;
