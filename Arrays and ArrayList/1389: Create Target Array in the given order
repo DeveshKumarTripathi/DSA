@@ -8,7 +8,7 @@ class Solution {
         for(int i = 0; i < n; i++){
             if(index[i]!=-1){
                 for(int j = n-1; j>index[i]; j--){ 
-                    target[j] = target[j-1];
+                    target[j] = target[j-1]; 
                 }
             }
             target[index[i]] = nums[i]; 
