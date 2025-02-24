@@ -5,7 +5,7 @@ class Solution {
         List<Boolean> result = new ArrayList<>();
 
         for(int c : candies){
-            maxElement = Math.max(maxElement, c);
+            maxElement = Math.max(maxElement, c); 
         }
 
         for(int c : candies){
