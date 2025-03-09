@@ -8,7 +8,7 @@ class Solution {
                 ans[indices[i][0]][j]++;
             }
             for(int j = 0; j < m; j++){
-                ans[j][indices[i][1]]++; 
+                ans[j][indices[i][1]]++;  
             }
         }
         int count = 0;
