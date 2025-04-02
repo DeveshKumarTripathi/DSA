@@ -8,7 +8,7 @@ class Solution {
             int sum = num[i] + (k % 10); 
             k = k / 10;                 
 
-            if (sum >= 10) {            
+            if (sum >= 10) {             
                 k += 1;                 
                 sum = sum % 10;        
             }
