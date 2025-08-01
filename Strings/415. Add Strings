@@ -1,0 +1,26 @@
+class Solution {
+    public String addStrings(String s1, String s2) {
+        int i = s1.length()-1;
+        int j = s2.length()-1;
+        int carry = 0;
+        StringBuilder res = new StringBuilder();
+        
+        while(i>=0 || j>=0 || carry>0){
+            int bitS1 = 0;
+            if(i>=0){
+                bitS1 = s1.charAt(i) - '0';
+                i--;
+            }
+            int bitS2 = 0;
+            if(j>=0){
+                bitS2 = s2.charAt(j) - '0';
+                j--;
+            }
+            int sum = bitS1 + bitS2 + carry;
+            res.append(sum % 10);
+            carry = sum / 10;
+        }
+        res = res.reverse();
+        return res.toString();
+    }
+}
