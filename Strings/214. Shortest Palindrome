@@ -1,0 +1,21 @@
+class Solution {
+    public String shortestPalindrome(String s) {
+        String reverse = new StringBuilder(s).reverse().toString();
+        String pat = s + "|" + reverse;
+        int n = pat.length();
+        int[] lps = new int[n];
+        
+        for(int i = 1, len = 0; i < n;){
+            if(pat.charAt(i) == pat.charAt(len)){
+                lps[i++] = ++len;
+                
+            }else if(len > 0) len = lps[len-1];
+            else lps[i++] = 0;
+        }
+        int k = s.length() - lps[n - 1];
+        String prefix = new StringBuilder(s.substring(s.length() - k)).reverse().toString();
+
+        return prefix + s;
+    }
+    
+}
