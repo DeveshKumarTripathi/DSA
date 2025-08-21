@@ -1,0 +1,17 @@
+class Solution {
+    static ArrayList<Integer> leaders(int arr[]) {
+        int n = arr.length;
+        
+        ArrayList<Integer> arr2 = new ArrayList<>();
+        int max = arr[n-1];
+        arr2.add(max);
+        
+        for(int j = n-2; j >=0;j--){
+            if(arr[j] >= max){
+                max = arr[j];
+                arr2.add(max);
+            }
+        }Collections.reverse(arr2);
+        return arr2;
+    }
+}
