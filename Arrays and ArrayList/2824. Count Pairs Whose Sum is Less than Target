@@ -1,0 +1,17 @@
+class Solution {
+    public int countPairs(List<Integer> arr, int tar) {
+        int n = arr.size();
+        Collections.sort(arr);
+        
+        int st = 0, end = n - 1, count = 0;
+        while(st < end){
+            if(arr.get(st) + arr.get(end) < tar){
+                count+= end-st;
+                st++;
+            }else{
+                end--;
+            }
+        }
+        return count;
+    }
+}
