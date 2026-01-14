@@ -1,0 +1,19 @@
+class Solution {
+    Boolean[] dp;
+    public boolean canJump(int[] nums) {
+        int n = nums.length;
+        dp = new Boolean[n];
+        return solve(0, n, nums);
+    }
+    public boolean solve(int i, int n, int[] nums) {
+        if(i == n - 1)return true;
+        if(nums[i] == 0)return false;
+
+        if (dp[i] != null) return dp[i];
+
+        for(int j = 1; j <= nums[i]; j++){
+            if(solve(i+j,n,nums))return dp[i] = true; 
+        }
+        return dp[i] = false;
+    }
+}
