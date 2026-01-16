@@ -1,0 +1,29 @@
+class Solution {
+    Boolean[][] dp;
+    public boolean isInterleave(String s1, String s2, String s3) {
+        if (s1.length() + s2.length() != s3.length()) return false;
+        
+        char[] S1 = s1.toCharArray();
+        char[] S2 = s2.toCharArray();
+        char[] S3 = s3.toCharArray();
+        
+        dp = new Boolean[s1.length() + 1][s2.length() + 1];
+        return solve(0,0,S1,S2,S3);
+    }
+    public boolean solve(int i, int j, char[] S1, char[] S2, char[] S3){
+        if(i == S1.length && j == S2.length && i + j == S3.length)return true;
+        if(i+j >= S3.length)return false;
+
+        if(dp[i][j] != null) return dp[i][j];
+
+        boolean result = false;
+        if(i < S1.length && S1[i] == S3[i+j]){
+            result = solve(i+1,j,S1,S2,S3);
+        }
+        if(result == true)return dp[i][j] = result;
+        if(j < S2.length && S2[j] == S3[i+j]){
+            result = solve(i,j+1,S1,S2,S3);
+        }
+        return dp[i][j] = result;
+    }
+}
