@@ -1,0 +1,27 @@
+class Solution {
+    static final int INF = (int)1e9;
+    public int coinChange(int[] coins, int amount) {
+        int n = coins.length;
+        int[][] dp = new int[n][amount+1];
+        for(int i = 0; i < n; i++){
+            Arrays.fill(dp[i], -1);
+        }
+        int ans = solve(n-1, amount, coins, dp);
+        if(ans >= INF)return -1;
+        else return ans;
+    }
+    static int solve(int i, int amount, int[] coins, int[][] dp){
+        if(amount == 0)return 0;
+        if(i < 0)return INF;
+        
+        if(dp[i][amount] != -1)return dp[i][amount];
+        
+        int pick = INF;
+        if(amount >= coins[i]){
+            pick = 1 + solve(i, amount - coins[i], coins, dp);
+        }
+        int notPick = solve(i - 1, amount, coins, dp);
+        
+        return dp[i][amount] = Math.min(pick, notPick);
+    }
+}
