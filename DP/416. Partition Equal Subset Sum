@@ -1,0 +1,31 @@
+class Solution {
+
+    public boolean canPartition(int[] nums) {
+        int total = 0;
+        for (int num : nums) total += num;
+        if (total % 2 != 0) return false;
+        int t = total / 2;
+        int[][] dp = new int[nums.length][t + 1];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j <= t; j++) {
+                dp[i][j] = -1;
+            }
+        }
+
+        return sumcal(nums, 0, t, dp) == 1;
+    }
+
+    private int sumcal(int[] nums, int i, int t, int[][] dp) {
+        if (t == 0) return 1; 
+        if (i == nums.length || t < 0) return 0; 
+
+        if (dp[i][t] != -1) {
+            return dp[i][t];
+        }
+
+        int in = sumcal(nums, i + 1, t - nums[i], dp);
+        int ex = sumcal(nums, i + 1, t, dp);
+        dp[i][t] = (in == 1 || ex == 1) ? 1 : 0;
+        return dp[i][t];
+    }
+}
