@@ -1,0 +1,21 @@
+class Solution {
+    public int numOfSubarrays(int[] arr, int k, int t) {
+        int n = arr.length;
+        int left = 0;
+        int right = 0;
+        int currSum = 0;
+        int count = 0;
+        while(right<n){
+            currSum += arr[right];
+            if(right >=k-1){
+                if(currSum/k>=t){
+                    count++;
+                }
+                currSum -= arr[left];
+                left++;
+            }
+            right++;
+        }
+        return count;
+    }
+}
