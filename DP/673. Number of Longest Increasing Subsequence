@@ -1,0 +1,41 @@
+import java.util.*;
+
+class Solution {
+    public int findNumberOfLIS(int[] nums) {
+        int n = nums.length;
+
+        int[] dp = new int[n];    // dp[i] = length of LIS ending at i
+        int[] cnt = new int[n];   // cnt[i] = number of LIS ending at i
+
+        // Initialization
+        Arrays.fill(dp, 1);
+        Arrays.fill(cnt, 1);
+
+        int maxLen = 1;
+
+        // Main DP loop
+        for (int i = 0; i < n; i++) {
+            for (int prev = 0; prev < i; prev++) {
+
+                if (nums[prev] < nums[i] && dp[prev] + 1 > dp[i]) {
+                    dp[i] = dp[prev] + 1;
+                    cnt[i] = cnt[prev];   // inherit count
+                }
+                else if (nums[prev] < nums[i] && dp[prev] + 1 == dp[i]) {
+                    cnt[i] += cnt[prev];  // add count
+                }
+            }
+            maxLen = Math.max(maxLen, dp[i]);
+        }
+
+        // Count number of LIS
+        int nos = 0;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] == maxLen) {
+                nos += cnt[i];
+            }
+        }
+
+        return nos;
+    }
+}
