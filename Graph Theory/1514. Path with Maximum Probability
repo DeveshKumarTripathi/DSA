@@ -1,0 +1,41 @@
+class Solution {
+    class Pair{
+        int node;
+        double prob;
+        Pair(int node,double prob){
+            this.node = node;
+            this.prob = prob;
+        }
+    }
+    public double maxProbability(int n, int[][] edges, double[] succProb, int st, int end) {
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<edges.length;i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            double prob = succProb[i];
+
+            adj.get(u).add(new Pair(v,prob));
+            adj.get(v).add(new Pair(u,prob));
+        }
+        double prob[] = new double[n];
+        PriorityQueue<Pair> q = new PriorityQueue<>((a,b)-> Double.compare(b.prob,a.prob));
+        q.add(new Pair(st,1));
+        while(!q.isEmpty()){
+            Pair curr = q.poll();
+
+            for(Pair nei : adj.get(curr.node)){
+                int neiNode = nei.node;
+                double neiProb = nei.prob;
+
+                if(prob[neiNode] < neiProb * curr.prob){
+                    prob[neiNode] = neiProb* curr.prob;
+                    q.add(new Pair(neiNode, prob[neiNode]));
+                }
+            }
+        }
+        return prob[end];
+    }
+}
