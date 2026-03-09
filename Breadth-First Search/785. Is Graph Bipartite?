@@ -1,0 +1,33 @@
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        
+        char[] color = new char[n];
+        Arrays.fill(color, 'G');
+
+        for(int start = 0; start < n; start++){
+
+            if(color[start] != 'G') continue;
+
+            Queue<Integer> q = new LinkedList<>();
+            q.add(start);
+            color[start] = 'R';
+            
+            while(!q.isEmpty()){
+                int curr = q.poll();
+
+                for(int nei : graph[curr]){
+
+                    if(color[nei] == 'G'){
+                        if(color[curr] == 'R')color[nei] = 'B';
+                        else color[nei] = 'R';
+                        q.add(nei);
+                    }else{
+                        if(color[curr] == color[nei])return false;
+                    }
+                }
+            }   
+        }
+        return true;
+    }
+}
