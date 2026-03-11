@@ -1,0 +1,49 @@
+class Solution {
+    int[] dr = {1,-1,0,0};
+    int[] dc = {0,0,1,-1};
+
+    public int[][] colorBorder(int[][] grid, int row, int col, int color) {
+        int n = grid.length;
+        int m = grid[0].length;
+
+        int[][] res = new int[n][m];
+
+        for(int i =0; i< n; i++){
+            for(int j = 0; j < m; j++){
+                res[i][j] = grid[i][j];
+            }
+        }
+
+        boolean[][] vis = new boolean[n][m];
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{row,col});
+        vis[row][col] = true;
+
+        while(!q.isEmpty()){
+            int[] curr = q.poll();
+            int r = curr[0];
+            int c = curr[1];
+
+            boolean border = false;
+
+            for(int i = 0; i < 4; i++){
+                int nr = dr[i] + r;
+                int nc = dc[i] + c;
+
+                if(nr < 0 || nr > n-1 || nc < 0 || nc > m-1){
+                    border = true;
+                    continue;
+                }
+                if(grid[nr][nc] != grid[r][c]){
+                    border = true;
+                }
+                if(!vis[nr][nc] && grid[nr][nc] == grid[r][c]){
+                    vis[nr][nc] = true;
+                    q.add(new int[]{nr,nc});
+                }
+            }
+            if(border)res[r][c] = color;
+        }
+        return res;
+    }
+}
