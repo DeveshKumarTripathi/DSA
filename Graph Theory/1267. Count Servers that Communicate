@@ -1,0 +1,52 @@
+class Solution {
+    public int countServers(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        boolean[][] vis = new boolean[n][m];
+
+        int ans = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(grid[i][j] == 1 && !vis[i][j]){
+                    int size = bfs(i, j, grid, vis);
+                    if(size > 1){
+                        ans += size;
+                    }
+                }
+            }
+        }return ans;
+    }
+    public int bfs(int i, int j, int[][] grid, boolean[][] vis){
+        int n = grid.length;
+        int m = grid[0].length;
+
+        Queue<int[]> q = new LinkedList<>();
+        
+        vis[i][j] = true;
+        q.add(new int[]{i,j});
+
+        int count = 1;
+
+        while(!q.isEmpty()){
+            int[] curr = q.poll();
+            int r =curr[0];
+            int c = curr[1];
+
+            for(int k = 0 ; k < m; k++){
+                if(grid[r][k] == 1 && !vis[r][k]){
+                    vis[r][k] =  true;
+                    q.add(new int[]{r,k});
+                    count++;
+                }
+            }
+            for(int l = 0 ; l < n; l++){
+                if(grid[l][c] == 1 && !vis[l][c]){
+                    vis[l][c] = true;
+                    q.add(new int[]{l,c});
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
