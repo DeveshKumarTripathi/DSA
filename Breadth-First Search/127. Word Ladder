@@ -4,7 +4,7 @@ class Solution {
         int dist;
         Pair(String word, int dist){
             this.word = word;
-            this.dist = dist;
+            this.dist = dist; 
         }
     }
     public int ladderLength(String bw, String ew, List<String> wl) {
