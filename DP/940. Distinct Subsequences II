@@ -1,0 +1,40 @@
+// class Solution {
+//     public int distinctSubseqII(String s) {
+//         int n = s.length();
+//         HashSet<String> set = new HashSet<>();
+
+//         solve(0, n, s, "", set);
+//         return set.size();
+//     }
+//     public void solve(int i, int n, String s, String curr, HashSet<String> set){
+//         if(i == n){
+//             if(curr.length() > 0){
+//                 set.add(curr);
+//             }
+//             return;
+//         }
+//         solve(i+1, n, s, curr + s.charAt(i), set);
+//         solve(i+1, n, s, curr, set);
+//     }
+// }
+
+
+class Solution {
+    public int distinctSubseqII(String s) {
+        final long MOD = 1_000_000_007L;
+
+        long dp = 1;
+        long[] last = new long[26];
+
+        for (char c : s.toCharArray()) {
+            int idx = c - 'a';
+
+            long newDp = (2 * dp - last[idx] + MOD) % MOD;
+
+            last[idx] = dp;
+            dp = newDp;
+        }
+
+        return (int) ((dp - 1 + MOD) % MOD);
+    }
+}
