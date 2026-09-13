@@ -1,0 +1,57 @@
+import java.util.HashMap;
+import java.util.Map;
+class Solution {
+    static class Info{
+        int count;
+        int li;
+        int diff;
+        boolean valid;
+        Info(int index){
+            count = 1;
+            li = index;
+            diff = 0;
+            valid = true;
+        }
+    }
+    public int countSpecialIntegers(int[] nums) {
+        Map<Integer, Info> map = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++){
+            int x = nums[i];
+            Info info = map.get(x);
+
+            if(info == null){
+                map.put(x, new Info(i));
+                continue;
+            }
+            int gap = i - info.li;
+
+            if(info.count == 1){
+                info.diff = gap;
+            }
+            else if(gap != info.diff){
+                info.valid = false;
+            }
+            info.li = i;
+            info.count++;
+        }
+        int ans = 0;
+        for(Info info : map.values()){
+            if(info.count >= 3 && info.valid){
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
