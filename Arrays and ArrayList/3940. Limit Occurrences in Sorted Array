@@ -1,0 +1,26 @@
+class Solution {
+    public int[] limitOccurrences(int[] nums, int k) {
+        int n = nums.length;
+        ArrayList<Integer> list = new ArrayList<>();
+        int prev = nums[0];
+        int count = 0;
+
+        for(int i = 0; i < n; i++){
+
+            if(count < k && nums[i] == prev){
+                list.add(nums[i]); 
+                count++;
+            }else if(nums[i] != prev){
+                count = 1;
+                prev = nums[i];
+                list.add(nums[i]);
+            }
+        }
+        int[] arr = new int[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+            arr[i] = list.get(i);
+        }
+        return arr;
+    }
+}
