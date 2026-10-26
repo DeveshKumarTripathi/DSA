@@ -1,0 +1,74 @@
+
+import java.util.*;
+
+class Solution {
+    class Pair {
+        int row;
+        int col;
+
+        Pair(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    int[] dr = {1, -1, 0, 0};
+    int[] dc = {0, 0, 1, -1};
+
+    public int countIslands(int[][] grid, int k) {
+        int n = grid.length;
+        int m = grid[0].length;
+        int count = 0;
+
+        boolean[][] vis = new boolean[n][m];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] != 0 && !vis[i][j]) {
+                    long sum = bfs(i, j, n, m, grid, vis);
+
+                    if (sum % k == 0) {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public long bfs(int i, int j, int n, int m,
+                   int[][] grid, boolean[][] vis) {
+
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(i, j));
+        vis[i][j] = true;
+
+        long sum = 0;
+
+        while (!q.isEmpty()) {
+            Pair curr = q.poll();
+
+            int currR = curr.row;
+            int currC = curr.col;
+
+            sum += grid[currR][currC];
+
+            for (int d = 0; d < 4; d++) {
+                int newR = currR + dr[d];
+                int newC = currC + dc[d];
+
+                if (newR >= 0 && newR < n &&
+                    newC >= 0 && newC < m &&
+                    !vis[newR][newC] &&
+                    grid[newR][newC] != 0) {
+
+                    vis[newR][newC] = true;
+                    q.add(new Pair(newR, newC));
+                }
+            }
+        }
+
+        return sum;
+    }
+}
