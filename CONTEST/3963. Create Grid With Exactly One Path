@@ -1,0 +1,21 @@
+class Solution {
+    public String[] createGrid(int m, int n) {
+        String[] res = new String[m];
+
+        StringBuilder s = new StringBuilder(".");
+        StringBuilder last = new StringBuilder();
+
+        for (int j = 1; j < n; j++) {
+            s.append("#");
+        }
+        for (int j = 0; j < n; j++) {
+            last.append(".");
+        }
+        
+        for (int i = 0; i < m-1; i++) {
+            res[i] = s.toString();
+        }
+        res[m-1] = last.toString();
+        return res;
+    }
+}
